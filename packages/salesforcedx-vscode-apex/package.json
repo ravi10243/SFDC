@@ -27,9 +27,15 @@
   "dependencies": {
     "@salesforce/apex-node": "0.10.0",
     "@salesforce/apex-tmlanguage": "1.4.0",
+<<<<<<< Updated upstream
     "@salesforce/core": "^2.35.0",
     "@salesforce/salesforcedx-utils-vscode": "55.1.0",
     "@salesforce/source-deploy-retrieve": "5.12.2",
+=======
+    "@salesforce/core": "^3.13.0",
+    "@salesforce/salesforcedx-utils-vscode": "54.12.0",
+    "@salesforce/source-deploy-retrieve": "6.0.3",
+>>>>>>> Stashed changes
     "expand-home-dir": "0.0.3",
     "find-java-home": "0.2.0",
     "path-exists": "3.0.0",

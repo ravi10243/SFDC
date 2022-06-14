@@ -5,7 +5,13 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+<<<<<<< Updated upstream
 import { ChildRelationship, DescribeSObjectResult, Field } from 'jsforce';
+=======
+import { DescribeSObjectResult, Field } from 'jsforce';
+import { ChildRelationship } from 'jsforce/describe-result';
+
+>>>>>>> Stashed changes
 export { ChildRelationship };
 
 export type SObjectField = Pick<

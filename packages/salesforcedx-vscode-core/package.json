@@ -30,13 +30,22 @@
     "@salesforce/salesforcedx-sobjects-faux-generator": "55.1.0",
     "@salesforce/salesforcedx-utils-vscode": "55.1.0",
     "@salesforce/schemas": "^1",
+<<<<<<< Updated upstream
     "@salesforce/source-deploy-retrieve": "5.12.2",
     "@salesforce/templates": "^55.0.0",
+=======
+    "@salesforce/source-deploy-retrieve": "6.0.3",
+    "@salesforce/templates": "^54.5.0",
+>>>>>>> Stashed changes
     "@salesforce/ts-types": "1.5.13",
     "adm-zip": "0.4.13",
     "applicationinsights": "1.0.7",
     "glob": "^7.1.2",
+<<<<<<< Updated upstream
     "jsforce": "1.11.0",
+=======
+    "jsforce": "2.0.0-beta.9",
+>>>>>>> Stashed changes
     "rxjs": "^5.4.1",
     "sanitize-filename": "^1.6.1",
     "shelljs": "0.8.5"

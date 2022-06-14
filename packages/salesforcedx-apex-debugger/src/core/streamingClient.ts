@@ -118,7 +118,11 @@ export class StreamingClientInfoBuilder {
 }
 
 export class StreamingClient {
+<<<<<<< Updated upstream
   private client: FayeClient;
+=======
+  private client: any;
+>>>>>>> Stashed changes
   private connected = false;
   private shouldDisconnect = false;
   private isReplaySupported = false;

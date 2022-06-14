@@ -5,11 +5,12 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import {
-  ChildRelationship,
   FieldDeclaration,
   SObject,
-  SObjectDefinition
+  SObjectDefinition,
+  ChildRelationship
 } from '../types';
+
 import { SObjectField } from '../types/describe';
 
 export const MODIFIER = 'global';

@@ -34,14 +34,19 @@ export class ManifestCreateExecutor extends LibraryCommandletExecutor<string> {
     this.sourcePaths = sourcePaths;
     this.responseText = responseText;
   }
-  public async run(response: ContinueResponse<string>,
-                   progress?: vscode.Progress<{ message?: string | undefined; increment?: number | undefined; }>,
-                   token?: vscode.CancellationToken): Promise<boolean> {
+  public async run(
+    response: ContinueResponse<string>,
+    progress?: vscode.Progress<{
+      message?: string | undefined;
+      increment?: number | undefined;
+    }>,
+    token?: vscode.CancellationToken
+  ): Promise<boolean> {
     if (this.sourcePaths) {
       const componentSet = ComponentSet.fromSource(this.sourcePaths);
       if (this.responseText === undefined) {
         // Canceled and declined to name the document
-        openUntitledDocument(componentSet);
+        await openUntitledDocument(componentSet);
       } else {
         saveDocument(this.responseText, componentSet);
       }
@@ -75,13 +80,15 @@ export async function forceCreateManifest(
   }
 }
 
-function openUntitledDocument(componentSet: ComponentSet) {
-  vscode.workspace.openTextDocument({
-    content: componentSet.getPackageXml(),
-    language: 'xml'
-  }).then(newManifest => {
-    vscode.window.showTextDocument(newManifest);
-  });
+async function openUntitledDocument(componentSet: ComponentSet) {
+  vscode.workspace
+    .openTextDocument({
+      content: await componentSet.getPackageXml(),
+      language: 'xml'
+    })
+    .then(newManifest => {
+      vscode.window.showTextDocument(newManifest);
+    });
 }
 
 function saveDocument(response: string, componentSet: ComponentSet) {
@@ -102,8 +109,12 @@ function saveDocument(response: string, componentSet: ComponentSet) {
 
 function checkForDuplicateManifest(saveLocation: string, fileName: string) {
   if (fs.existsSync(saveLocation)) {
-    vscode.window.showErrorMessage(format(nls.localize('manifest_input_dupe_error'), fileName));
-    throw new Error(format(nls.localize('manifest_input_dupe_error'), fileName));
+    vscode.window.showErrorMessage(
+      format(nls.localize('manifest_input_dupe_error'), fileName)
+    );
+    throw new Error(
+      format(nls.localize('manifest_input_dupe_error'), fileName)
+    );
   }
 }
 
