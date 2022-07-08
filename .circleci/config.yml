@@ -79,7 +79,7 @@ commands:
             nvm install $NODE_VERSION
             nvm use $NODE_VERSION
             nvm install-latest-npm
-            nvm install --latest-npm
+            npm install npm@8.12.1 -g
       - run:
           name: 'Install dependent modules'
           shell: bash.exe
