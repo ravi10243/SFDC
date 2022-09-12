@@ -17,7 +17,7 @@ import { channelService } from '../../../src/channels';
 import { OrgList } from '../../../src/orgPicker';
 
 describe('orgUtil tests', () => {
-  let sb = createSandbox();
+  const sb = createSandbox();
 
   afterEach(async () => {
     sb.restore();
