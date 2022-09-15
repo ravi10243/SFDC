@@ -6,25 +6,12 @@
  */
 
 import { GlobalCliEnvironment } from '../cli';
-import { ConfigUtil } from './configUtil';
 
 export const ENV_SFDX_DISABLE_TELEMETRY = 'SFDX_DISABLE_TELEMETRY';
-export const SFDX_CONFIG_DISABLE_TELEMETRY = 'disableTelemetry';
 
 export function disableCLITelemetry() {
   GlobalCliEnvironment.environmentVariables.set(
     ENV_SFDX_DISABLE_TELEMETRY,
     'true'
   );
-}
-
-export async function isCLITelemetryAllowed(): Promise<boolean> {
-  try {
-    const disabledConfig =
-      (await ConfigUtil.getConfigValue(SFDX_CONFIG_DISABLE_TELEMETRY)) || '';
-    return disabledConfig !== 'true';
-  } catch (e) {
-    console.log('Error checking cli settings: ' + e);
-  }
-  return true;
 }

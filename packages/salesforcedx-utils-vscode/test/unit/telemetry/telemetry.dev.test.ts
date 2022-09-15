@@ -7,7 +7,7 @@
 
 import { expect } from 'chai';
 import { SinonStub, stub } from 'sinon';
-import { TelemetryReporter, TelemetryService } from '../../../src';
+import { ConfigUtil, TelemetryReporter, TelemetryService } from '../../../src';
 import * as cliConfiguration from '../../../src/telemetry/cliConfiguration';
 import { MockExtensionContext } from './MockExtensionContext';
 
@@ -35,9 +35,7 @@ describe('Telemetry dev mode', () => {
     // @ts-ignore
     TelemetryReporter.mockImplementation(() => telemetryReporterStub);
     jest.spyOn(cliConfiguration, 'disableCLITelemetry');
-    jest
-      .spyOn(cliConfiguration, 'isCLITelemetryAllowed')
-      .mockResolvedValue(true);
+    jest.spyOn(ConfigUtil, 'isTelemetryDisabled').mockResolvedValue(false);
 
     telemetryService = TelemetryService.getInstance();
     teleStub = stub(telemetryService, 'setCliTelemetryEnabled');

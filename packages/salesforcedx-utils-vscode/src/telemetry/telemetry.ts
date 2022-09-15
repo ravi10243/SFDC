@@ -7,8 +7,9 @@
 
 import * as util from 'util';
 import { env, ExtensionContext, workspace } from 'vscode';
+import { ConfigUtil } from '../config/configUtil';
 import { SFDX_CORE_CONFIGURATION_NAME } from '../constants';
-import { disableCLITelemetry, isCLITelemetryAllowed } from './cliConfiguration';
+import { disableCLITelemetry } from './cliConfiguration';
 import { TelemetryReporter } from './telemetryReporter';
 
 interface CommandMetric {
@@ -128,10 +129,15 @@ export class TelemetryService {
   }
 
   public async checkCliTelemetry(): Promise<boolean> {
+    // This flow is called many times during initalization of the extensions.
+    // In order to avoid hitting the file system repeatedly we cache the promise to
+    // get the current telemetry setting at launch.
     if (typeof this.cliAllowsTelemetryPromise !== 'undefined') {
       return this.cliAllowsTelemetryPromise;
     }
-    this.cliAllowsTelemetryPromise = isCLITelemetryAllowed();
+    this.cliAllowsTelemetryPromise = ConfigUtil.isTelemetryDisabled().then(
+      disabled => !disabled
+    );
     return await this.cliAllowsTelemetryPromise;
   }
 

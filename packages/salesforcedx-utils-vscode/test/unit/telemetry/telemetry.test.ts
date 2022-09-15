@@ -15,6 +15,7 @@ import {
   stub
 } from 'sinon';
 import {
+  ConfigUtil,
   TelemetryBuilder,
   TelemetryReporter,
   TelemetryService
@@ -51,9 +52,7 @@ describe('Telemetry production mode', () => {
     jest.spyOn(TelemetryReporter.prototype, 'dispose');
 
     jest.spyOn(cliConfiguration, 'disableCLITelemetry');
-    jest
-      .spyOn(cliConfiguration, 'isCLITelemetryAllowed')
-      .mockResolvedValue(true);
+    jest.spyOn(ConfigUtil, 'isTelemetryDisabled').mockResolvedValue(false);
 
     telemetryService = TelemetryService.getInstance();
     telemetryBuilder = new TelemetryBuilder();
