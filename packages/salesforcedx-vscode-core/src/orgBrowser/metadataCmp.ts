@@ -5,7 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Connection } from '@salesforce/core';
-import { isNullOrUndefined } from '@salesforce/salesforcedx-utils-vscode';
+import {
+  isNullOrUndefined,
+  PathService
+} from '@salesforce/salesforcedx-utils-vscode';
 import { standardValueSet } from '@salesforce/source-deploy-retrieve/lib/src/registry';
 import * as fs from 'fs';
 import { ListMetadataQuery } from 'jsforce/api/metadata';
@@ -13,7 +16,7 @@ import * as path from 'path';
 import { workspaceContext } from '../context';
 import { nls } from '../messages';
 import { telemetryService } from '../telemetry';
-import { OrgAuthInfo, workspaceUtils } from '../util';
+import { workspaceUtils } from '../util';
 
 const validManageableStates = new Set([
   'unmanaged',
@@ -38,12 +41,11 @@ export class ComponentUtils {
       throw new Error(err);
     }
 
-    const username = await OrgAuthInfo.getUsername(defaultUsernameOrAlias);
     const fileName = `${
       folderName ? `${metadataType}_${folderName}` : metadataType
     }.json`;
     const componentsPath = path.join(
-      workspaceContext.getMetadataDirectoryPath(username),
+      await PathService.getMetadataDirectoryPath(),
       fileName
     );
     return componentsPath;

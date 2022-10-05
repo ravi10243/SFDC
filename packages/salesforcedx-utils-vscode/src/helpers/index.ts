@@ -8,16 +8,17 @@
 export {
   ensureDirectoryExists,
   fileExtensionsMatch,
-  getTestResultsFolder,
-  getRelativeProjectPath
+  getRelativeProjectPath,
+  getTestResultsFolder
 } from './paths';
+export * from './pathService';
 export { TraceFlags } from './traceFlags';
 export { TraceFlagsRemover } from './traceFlagsRemover';
 export {
   asyncFilter,
   extractJsonObject,
-  isNullOrUndefined,
-  fileUtils
+  fileUtils,
+  isNullOrUndefined
 } from './utils';
 export {
   isAlphaNumSpaceString,

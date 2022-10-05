@@ -6,6 +6,7 @@
  */
 import { AuthInfo, Connection, Global } from '@salesforce/core';
 import { MockTestOrgData, testSetup } from '@salesforce/core/lib/testSetup';
+import { PathService } from '@salesforce/salesforcedx-utils-vscode';
 import { standardValueSet } from '@salesforce/source-deploy-retrieve/lib/src/registry';
 import { expect } from 'chai';
 import * as fs from 'fs';
@@ -66,9 +67,12 @@ const expectedFieldList = [
   'Age__c (number)'
 ];
 
+const fakePath = '/path/to/a/place/where/metadata/lives';
+
 // tslint:disable:no-unused-expression
 describe('get metadata components path', () => {
   let getUsernameStub: SinonStub;
+  let getMetadataDirectoryPathStub: SinonStub;
   const rootWorkspacePath = workspaceUtils.getRootWorkspacePath();
   const cmpUtil = new ComponentUtils();
   const alias = 'test user 1';
@@ -78,20 +82,18 @@ describe('get metadata components path', () => {
     getUsernameStub = stub(OrgAuthInfo, 'getUsername').returns(
       'test-username1@example.com'
     );
+    getMetadataDirectoryPathStub = stub(
+      PathService,
+      'getMetadataDirectoryPath'
+    ).resolves(fakePath);
   });
   afterEach(() => {
     getUsernameStub.restore();
+    getMetadataDirectoryPathStub.restore();
   });
 
   function expectedPath(fileName: string) {
-    return path.join(
-      rootWorkspacePath,
-      Global.SFDX_STATE_FOLDER,
-      'orgs',
-      username,
-      'metadata',
-      fileName + '.json'
-    );
+    return path.join(fakePath, `${fileName}.json`);
   }
 
   it('should return the path for a given username and metadata type', async () => {
