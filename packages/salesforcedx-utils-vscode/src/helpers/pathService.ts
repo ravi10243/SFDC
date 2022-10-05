@@ -24,6 +24,6 @@ const getMetadataDirectoryPath = async () => {
   return join(getSfdxDirectoryPath(), 'orgs', username, 'metadata');
 };
 
-export const PathService = {
+export const pathService = {
   getMetadataDirectoryPath
 };

@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { ConfigUtil, PathService, NO_USERNAME_MSG } from '../../../src';
+import { ConfigUtil, NO_USERNAME_MSG, pathService } from '../../../src';
 import { workspaceUtils } from '../../../src/workspaces';
 
 describe('pathService Unit Tests.', () => {
@@ -26,7 +26,7 @@ describe('pathService Unit Tests.', () => {
   describe('getMetadataDirectory()', () => {
     const expectedMetadataDir = `${fakeRootWorkspacePath}/.sfdx/orgs/${fakeUserName}/metadata`;
     it('Should be able to get the metadata directory.', async () => {
-      const path = await PathService.getMetadataDirectoryPath();
+      const path = await pathService.getMetadataDirectoryPath();
       expect(path).toEqual(expectedMetadataDir);
       expect(getRootWorkspacePathSpy).toHaveBeenCalled();
       expect(getUsernameSpy).toHaveBeenCalled();
@@ -35,7 +35,7 @@ describe('pathService Unit Tests.', () => {
     it('Should throw if no username is configured.', async () => {
       getUsernameSpy.mockResolvedValue(undefined);
       await expect(async () => {
-        await PathService.getMetadataDirectoryPath();
+        await pathService.getMetadataDirectoryPath();
       }).rejects.toThrowError(NO_USERNAME_MSG);
     });
   });

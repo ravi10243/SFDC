@@ -6,7 +6,7 @@
  */
 import { AuthInfo, Connection, Global } from '@salesforce/core';
 import { MockTestOrgData, testSetup } from '@salesforce/core/lib/testSetup';
-import { PathService } from '@salesforce/salesforcedx-utils-vscode';
+import { pathService } from '@salesforce/salesforcedx-utils-vscode';
 import { standardValueSet } from '@salesforce/source-deploy-retrieve/lib/src/registry';
 import { expect } from 'chai';
 import * as fs from 'fs';
@@ -83,7 +83,7 @@ describe('get metadata components path', () => {
       'test-username1@example.com'
     );
     getMetadataDirectoryPathStub = stub(
-      PathService,
+      pathService,
       'getMetadataDirectoryPath'
     ).resolves(fakePath);
   });

@@ -7,7 +7,7 @@
 import { Connection } from '@salesforce/core';
 import {
   isNullOrUndefined,
-  PathService
+  pathService
 } from '@salesforce/salesforcedx-utils-vscode';
 import { standardValueSet } from '@salesforce/source-deploy-retrieve/lib/src/registry';
 import * as fs from 'fs';
@@ -45,7 +45,7 @@ export class ComponentUtils {
       folderName ? `${metadataType}_${folderName}` : metadataType
     }.json`;
     const componentsPath = path.join(
-      await PathService.getMetadataDirectoryPath(),
+      await pathService.getMetadataDirectoryPath(),
       fileName
     );
     return componentsPath;
